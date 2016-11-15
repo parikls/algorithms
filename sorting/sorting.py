@@ -51,12 +51,19 @@ def merge_sort(list_):
 
     def merge(left, right):
         merged_and_sorted = []
-        while left and right:
-            if left[0] <= right[0]:
-                merged_and_sorted.append(left.pop(0))
+        left_index = 0
+        right_index = 0
+        while left_index < len(left) and right_index < len(right):
+            if left[left_index] <= right[right_index]:
+                merged_and_sorted.append(left[left_index])
+                left_index += 1
             else:
-                merged_and_sorted.append(right.pop(0))
-        merged_and_sorted += left + right
+                merged_and_sorted.append(right[right_index])
+                right_index += 1
+        if left_index == len(left):
+            merged_and_sorted += right[right_index:]
+        else:
+            merged_and_sorted += left[left_index:]
         return merged_and_sorted
 
     if len(list_) == 1:
